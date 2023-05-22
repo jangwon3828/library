@@ -2,10 +2,7 @@ package org.example.repository;
 
 import org.example.entity.Book;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -50,7 +47,7 @@ public class BookRepository {
     }
 
     public List<Book> findByYear(LocalDate localDate) {
-        String query = "select * from books where year_of_publication > '"+ localDate+"'";
+        String query = "select * from books where year_of_publication > '" + localDate + "'";
         return getBooks(query);
 
     }
@@ -60,6 +57,7 @@ public class BookRepository {
         return getBooks(query);
 
     }
+
     private List<Book> getBooks(String query) {
         List<Book> books = new ArrayList<>();
         try {
@@ -88,21 +86,63 @@ public class BookRepository {
         return books;
     }
 
+    private Book getBook(String query) {
+        Book book=new Book();
+        try {
+            ResultSet rs = st.executeQuery(query);
+            String str = rs.getString("year_of_publication");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String[] s = str.split(" ");
+            LocalDate dateTime = LocalDate.parse(s[0], formatter);
+            book = new Book(Long.parseLong(rs.getString("book_id")),
+                    rs.getString("bookname"),
+                    rs.getString("author"),
+                    rs.getString("publisher"),
+                    Long.parseLong(rs.getString("borrowcount")),
+                    rs.getString("ISBN_NO"),
+                    dateTime,
+                    Long.parseLong(rs.getString("count"))
+            );
+            return book;
 
-    public void insertBook(Book book){
-        try{
-            st.execute("insert into books(book_id, bookname, author, publisher, borrowcount, ISBN_NO, year_of_publication, count) values (null,'"+book.getBook_name()+"','"+book.getAuthor()+"','"+book.getPublisher()+"','"+book.getBorrow_count()+"','"+book.getISBN_NO()+"','"+book.getYear_of_publication()+"','"+book.getCount()+"');");
-        }catch(Exception e){
+        } catch (Exception e) {
+            System.out.println("에러발생 findByAuthor");
+        }
+        return book;
+
+    }
+
+    public void insertBook(Book book) {
+        try {
+            st.execute("insert into books(book_id, bookname, author, publisher, borrowcount, ISBN_NO, year_of_publication, count) values (null,'" + book.getBook_name() + "','" + book.getAuthor() + "','" + book.getPublisher() + "','" + book.getBorrow_count() + "','" + book.getISBN_NO() + "','" + book.getYear_of_publication() + "','" + book.getCount() + "');");
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
-            try{
-                if(st!=null)
+        } finally {
+            try {
+                if (st != null)
                     st.close();
-                if(con !=null)
+                if (con != null)
                     con.close();
-            }catch(Exception e2){
+            } catch (Exception e2) {
                 e2.printStackTrace();
             }
+        }
+    }
+
+    public boolean checkoutBook(Long book_id) {
+        String query = "update books set borrowcount = borrowcount +1  count = count-1 where book_id= " + book_id + "'";
+        try {
+            return st.execute(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean returnBook(Long book_id) {
+        String query = "update books set count = count+1 where book_id= " + book_id + "'";
+        try {
+            return st.execute(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
