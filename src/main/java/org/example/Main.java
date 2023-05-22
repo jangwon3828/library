@@ -16,9 +16,8 @@ import static org.example.input.OutPutView.init;
 public class Main {
 
     public static void main(String[] args) {
-        init();
         BookReadService bookRepository= BookReadService.getInstance();
-        bookRepository.findByAuthor();
+        bookRepository.findByTop10();
     }
 
 

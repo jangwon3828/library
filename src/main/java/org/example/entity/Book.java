@@ -2,7 +2,7 @@ package org.example.entity;
 
 import java.time.LocalDate;
 
-public class Book {
+public class Book implements Comparable<Book>{
     private Long book_id;
     private String book_name;
     private String author;
@@ -82,5 +82,10 @@ public class Book {
 
     public void updateCount(Long count) {
         this.count = count;
+    }
+
+    @Override
+    public int compareTo(Book b){
+        return (int) (b.getBorrow_count()-getBorrow_count());
     }
 }
