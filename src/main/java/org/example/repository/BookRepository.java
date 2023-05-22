@@ -32,14 +32,30 @@ public class BookRepository {
 
     public List<Book> findByAuthor(String author) {
         String query = "select * from books where author = '" + author + "'";
+        return getBooks(query);
+
+    }
+
+    public List<Book> findByBook(String author) {
+        String query = "select * from books where author = '" + author + "'";
+        return getBooks(query);
+    }
+
+    public List<Book> findByPublisher(String publisher) {
+        String query = "select * from books where publisher  = '" + publisher + "'";
+        return getBooks(query);
+    }
+
+    private List<Book> getBooks(String query) {
         List<Book> books = new ArrayList<>();
         try {
             ResultSet rs = st.executeQuery(query);
+
             while (rs.next()) {
                 String str = rs.getString("year_of_publication");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String[] s = str.split(" ");
-                LocalDateTime dateTime = LocalDateTime.parse(s[0], formatter);
+                LocalDate dateTime = LocalDate.parse(s[0], formatter);
                 Book book = new Book(Long.parseLong(rs.getString("book_id")),
                         rs.getString("bookname"),
                         rs.getString("author"),
@@ -56,6 +72,5 @@ public class BookRepository {
         }
 
         return books;
-
     }
 }

@@ -1,8 +1,11 @@
 package org.example;
 
 import org.example.entity.Book;
+import org.example.input.InputView;
 import org.example.repository.BookRepository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main {
@@ -10,6 +13,9 @@ public class Main {
     public static void main(String[] args) {
         init();
         BookRepository bookRepository=BookRepository.getInstance();
+        LocalDate localDateTime = InputView.inputLocalDateTime("dpsdajfk");
+
+        System.out.println(localDateTime);
 //
 //        printBooks(books);
     }

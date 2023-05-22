@@ -18,12 +18,12 @@ public class InputView {
         return sc.nextLong();
     }
 
-    public static LocalDateTime inputLocalDateTime(String msg) {
+    public static LocalDate inputLocalDateTime(String msg) {
         System.out.println(msg);
         //yyyy-mm-dd로 입력하기
         String time = sc.nextLine();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDateTime.parse(time, formatter);
+        return LocalDate.parse(time, formatter);
     }
 
 
