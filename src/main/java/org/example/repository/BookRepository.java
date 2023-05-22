@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.example.input.OutPutView.printMsg;
+
 
 public class BookRepository {
     private static BookRepository bookRepository = new BookRepository();
@@ -132,18 +134,23 @@ public class BookRepository {
         }
     }
   
-     public boolean checkoutBook(Long book_id) {
-        String query = "update books set borrowcount = borrowcount +1  count = count-1 where book_id= " + book_id + "'";
+     public void checkoutBook(Long book_id) {
+        int bookId= Math.toIntExact(book_id);
+        String query = "update books set borrowcount = borrowcount +1 , count = count-1 where book_id= " + bookId  ;
         try {
-            return st.execute(query);
+            st.execute(query);
+            printMsg("책을 빌렸습니다");
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public boolean returnBook(Long book_id) {
-        String query = "update books set count = count+1 where book_id= " + book_id + "'";
+    public void returnBook(Long book_id) {
+        String query = "update books set count = count+1 where book_id= " + book_id ;
         try {
-            return st.execute(query);
+            st.execute(query);
+            printMsg("책을 반납하였습니다.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

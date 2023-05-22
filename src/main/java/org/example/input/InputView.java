@@ -11,7 +11,7 @@ public class InputView {
 
     public static String inputString(String msg) {
         System.out.println(msg);
-        return sc.nextLine();
+        return sc.next();
     }
 
     public static Long inputLong(String msg) {
@@ -28,14 +28,13 @@ public class InputView {
         printMsg("1.저자로 검색하기");
         printMsg("2.책이름으로 검색하기");
         printMsg("3.출판사로 검색하기");
-        Long index = InputView.inputLong("검색방법을 입력해주세요");
-        return index;
+        return InputView.inputLong("검색방법을 입력해주세요");
     }
 
     public static LocalDate inputLocalDateTime(String msg) {
         System.out.println(msg);
         //yyyy-mm-dd로 입력하기
-        String time = sc.nextLine();
+        String time = sc.next();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(time, formatter);
     }
