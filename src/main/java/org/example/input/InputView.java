@@ -1,7 +1,6 @@
 package org.example.input;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -13,6 +12,11 @@ public class InputView {
     public static String inputString(String msg) {
         System.out.println(msg);
         return sc.nextLine();
+    }
+
+    public static Integer inputInteger(String msg){
+        System.out.println(msg);
+        return sc.nextInt();
     }
 
     public static Long inputLong(String msg) {

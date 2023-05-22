@@ -71,8 +71,17 @@ public class BookReadService {
             }
             printBooks(top10);
         }
+
         return books;
 
     }
 
+    public void getDeleteBookInfo(){
+        String book_name = InputView.inputString("삭제할 책 제목을 입력해 주세요.");
+        List<Book> books = bookRepository.findByBookName(book_name);
+        printBooks(books);
+        //TODO : books size가 0일 때의 예외 처리
+        Long book_id = InputView.inputLong("삭제할 책의 고유 번호를 입력해 주세요.");
+        bookRepository.deleteBook(book_id);
+    }
 }
