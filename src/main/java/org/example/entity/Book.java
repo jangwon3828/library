@@ -12,7 +12,10 @@ public class Book implements Comparable<Book>{
     private LocalDate year_of_publication;
     private Long count;
 
-    public Book(Long  book_id,String book_name, String author, String publisher, Long borrow_count, String ISBN_NO, LocalDate year_of_publication, Long count) {
+    public Book() {
+    }
+
+    public Book(Long  book_id, String book_name, String author, String publisher, Long borrow_count, String ISBN_NO, LocalDate year_of_publication, Long count) {
         this.book_id=book_id;
         this.book_name = book_name;
         this.author = author;

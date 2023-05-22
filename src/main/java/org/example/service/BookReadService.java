@@ -2,7 +2,6 @@ package org.example.service;
 
 
 import org.example.entity.Book;
-import org.example.input.InputView;
 import org.example.repository.BookRepository;
 
 import java.time.LocalDate;
@@ -25,37 +24,42 @@ public class BookReadService {
 
     private BookRepository bookRepository=BookRepository.getInstance();
 
-    public void findByAuthor(){
+    public  List<Book> findByAuthor(){
         String author = inputString("찾으실 저자를 입력하세요");
         List<Book> books = bookRepository.findByAuthor(author);
         printBooks(books);
+        return books;
     }
 
 
-    public void findByBookName(){
+    public  List<Book> findByBookName(){
         String book = inputString("찾으실 책이름을 입력하세요");
         List<Book> books = bookRepository.findByBookName(book);
         printBooks(books);
+        return books;
     }
 
-    public void findByPublisher(){
+    public  List<Book> findByPublisher(){
         String publisher = inputString("찾으실 출판사를 입력하세요");
         List<Book> books = bookRepository.findByPublisher(publisher);
         printBooks(books);
+        return books;
     }
 
-    public void findByYear(){
+    public  List<Book> findByYear(){
         LocalDate localDate = inputLocalDateTime("몇년도 이후의 책을 검색하시겠습니까? ex)2022-01-01");
         List<Book> books = bookRepository.findByYear(localDate);
         printBooks(books);
+        return books;
     }
 
-    public void findByAll(){
+    public  List<Book> findByAll(){
         List<Book> books = bookRepository.findByAll();
         printBooks(books);
+        return books;
     }
 
-    public void findByTop10(){
+    public  List<Book> findByTop10(){
         List<Book> books = bookRepository.findByAll();
         Collections.sort(books);
         if(books.size()<10){
@@ -67,6 +71,9 @@ public class BookReadService {
             }
             printBooks(top10);
         }
+
+        return books;
+
     }
 
     public void getDeleteBookInfo(){

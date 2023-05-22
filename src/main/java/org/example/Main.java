@@ -17,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         BookReadService bookRepository= BookReadService.getInstance();
-        bookRepository.findByTop10();
+        bookRepository.findByBookName();
     }
 
 
