@@ -9,4 +9,8 @@ public class OutPutView {
         System.out.println("★                                                       ★");
         System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
     }
+
+    public static void printMsg(String msg){
+        System.out.println(msg);
+    }
 }
