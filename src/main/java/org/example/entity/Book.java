@@ -2,6 +2,7 @@ package org.example.entity;
 
 import org.example.repository.BookRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Book {
@@ -13,6 +14,17 @@ public class Book {
     private String ISBN_NO;
     private LocalDateTime year_of_publication;
     private Long count;
+
+    public Book(Long  book_id,String bookName, String author, String publisher, Long borrowCount, String ISBN_NO, LocalDateTime year_of_publication, Long count) {
+        this.book_id=book_id;
+        this.bookName = bookName;
+        this.author = author;
+        this.publisher = publisher;
+        this.borrowCount = borrowCount;
+        this.ISBN_NO = ISBN_NO;
+        this.year_of_publication = year_of_publication;
+        this.count = count;
+    }
 
     public Long getBook_id() {
         return book_id;

@@ -1,17 +1,31 @@
 package org.example;
 
-import java.sql.ResultSet;
+import org.example.entity.Book;
+import org.example.repository.BookRepository;
 
-import static org.example.Connection.conn;
-import static org.example.Connection.st;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        connectDB();
         init();
-        while (true){
+        BookRepository bookRepository=BookRepository.getInstance();
+//
+//        printBooks(books);
+    }
 
+    private static void printBooks(List<Book> books) {
+        for(Book book: books){
+            System.out.println(book.getBook_id());
+            System.out.println(book.getBookName());
+            System.out.println(book.getPublisher());
+            System.out.println(book.getISBN_NO());
+            System.out.println(book.getCount());
+            System.out.println(book.getBorrowCount());
+            System.out.println(book.getYear_of_publication());
+            System.out.println(book.getAuthor());
+            System.out.println();
+            System.out.println();
         }
     }
 
@@ -20,20 +34,5 @@ public class Main {
         System.out.println("");
     }
 
-    private static void connectDB() {
-        try{
-            ResultSet rs = st.executeQuery("show databases");
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            try{
-                if(st!=null)
-                    st.close();
-                if(conn !=null)
-                    conn.close();
-            }catch(Exception e2){
-                e2.printStackTrace();
-            }
-        }
-    }
+
 }
