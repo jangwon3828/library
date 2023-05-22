@@ -13,24 +13,17 @@ import static org.example.input.OutPutView.printMsg;
 
 
 public class BookRepository {
-    private static BookRepository bookRepository = new BookRepository();
-    private Connection con;
-    private Statement st;
+    private static Connection con;
+    private static Statement st;
 
-
-    private BookRepository() {
+    public BookRepository(){
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library?serverTimezon=UTC", "root", "1234");
             st = con.createStatement();
             System.out.println("데이터 베이스와 연결이 성공적으로 되었습니다");
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-
-    public static BookRepository getInstance() {
-        return bookRepository;
     }
 
     public List<Book> findByAuthor(String author) {

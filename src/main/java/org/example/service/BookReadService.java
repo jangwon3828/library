@@ -15,15 +15,10 @@ import static org.example.input.InputView.inputString;
 import static org.example.input.OutPutView.printBooks;
 
 public class BookReadService {
-    private static BookReadService bookReadService=new BookReadService();
-    private BookReadService(){
+    private BookRepository bookRepository;
+    public BookReadService(BookRepository bookRepository){
+        this.bookRepository = bookRepository;
     }
-
-    public static BookReadService getInstance(){
-        return bookReadService;
-    }
-
-    private BookRepository bookRepository=BookRepository.getInstance();
 
     public  List<Book> findByAuthor(){
         String author = inputString("찾으실 저자를 입력하세요");
@@ -80,9 +75,13 @@ public class BookReadService {
     public void getDeleteBookInfo(){
         String book_name = InputView.inputString("삭제할 책 제목을 입력해 주세요.");
         List<Book> books = bookRepository.findByBookName(book_name);
-        printBooks(books);
-        //TODO : books size가 0일 때의 예외 처리
-        Long book_id = InputView.inputLong("삭제할 책의 고유 번호를 입력해 주세요.");
-        bookRepository.deleteBook(book_id);
+        if(books.size()>0){
+            printBooks(books);
+            Long book_id = InputView.inputLong("삭제할 책의 고유 번호를 입력해 주세요.");
+            bookRepository.deleteBook(book_id);
+        }
+        else{
+            System.out.println("책의 정보가 존재하지 않습니다.");
+        }
     }
 }

@@ -1,23 +1,20 @@
 package org.example;
 
 
-import org.example.controller.BookRunner;
-import org.example.entity.Book;
-import org.example.input.InputView;
-import org.example.repository.BookRepository;
-import org.example.service.BookReadService;
+import org.example.controller.Common;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-
+import static org.example.input.InputView.getChoice;
 import static org.example.input.OutPutView.init;
 
 
 public class Main {
+
     public static void main(String[] args) {
-        BookRunner bookRunner = new BookRunner();
-        bookRunner.run();
+        init();
+        while(true){
+            Common common = Common.findByIndex(getChoice());
+            common.exec();
+        }
     }
 
 

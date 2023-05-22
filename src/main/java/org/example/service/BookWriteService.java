@@ -12,17 +12,14 @@ import static org.example.input.InputView.*;
 import static org.example.input.OutPutView.printMsg;
 
 public class BookWriteService {
-    private static BookWriteService bookWriteService = new BookWriteService();
 
-    private BookWriteService() {
+    private BookRepository bookRepository;
+    private BookReadService bookReadService;
+
+    public BookWriteService(BookRepository bookRepository, BookReadService bookReadService){
+        this.bookRepository=bookRepository;
+        this.bookReadService=bookReadService;
     }
-
-    public static BookWriteService getInstance() {
-        return bookWriteService;
-    }
-
-    BookReadService bookReadService = BookReadService.getInstance();
-    BookRepository bookRepository = BookRepository.getInstance();
 
     public void getNewBookInfo() {
         String bookName = inputString("책 제목을 입력해 주세요.");
@@ -39,9 +36,7 @@ public class BookWriteService {
 
         Book book = new Book(null, bookName, author, publisher, borrowCount, ISBN_NO, year_of_publication, count);
 
-        BookRepository br = BookRepository.getInstance();
-        br.insertBook(book);
-        printMsg("도서 등록이 완료되었습니다.");
+        bookRepository.insertBook(book);
     }
 
 
