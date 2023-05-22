@@ -7,10 +7,8 @@ import org.example.repository.BookRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static org.example.input.InputView.inputLocalDateTime;
 import static org.example.input.InputView.inputString;
@@ -69,7 +67,14 @@ public class BookReadService {
             }
             printBooks(top10);
         }
-
     }
 
+    public void getDeleteBookInfo(){
+        String book_name = InputView.inputString("삭제할 책 제목을 입력해 주세요.");
+        List<Book> books = bookRepository.findByBookName(book_name);
+        printBooks(books);
+        //TODO : books size가 0일 때의 예외 처리
+        Long book_id = InputView.inputLong("삭제할 책의 고유 번호를 입력해 주세요.");
+        bookRepository.deleteBook(book_id);
+    }
 }
