@@ -1,12 +1,12 @@
 package org.example.repository;
 
 import org.example.entity.Book;
-import org.example.input.InputView;
 
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,6 @@ public class BookRepository {
     private BookRepository() {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library?serverTimezon=UTC", "root", "1234");
-
             st = con.createStatement();
             System.out.println("데이터 베이스와 연결이 성공적으로 되었습니다");
         } catch (Exception e) {
@@ -78,9 +77,6 @@ public class BookRepository {
         return books;
     }
 
-    public static BookRepository getInstance(){
-        return bookRepository;
-    }
 
     public void insertBook(Book book){
         try{

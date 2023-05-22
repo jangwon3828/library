@@ -12,12 +12,12 @@ public class Book {
     private LocalDate year_of_publication;
     private Long count;
 
-    public Book(Long  book_id,String bookName, String author, String publisher, Long borrowCount, String ISBN_NO, LocalDate year_of_publication, Long count) {
+    public Book(Long  book_id,String book_name, String author, String publisher, Long borrow_count, String ISBN_NO, LocalDate year_of_publication, Long count) {
         this.book_id=book_id;
-        this.bookName = bookName;
+        this.book_name = book_name;
         this.author = author;
         this.publisher = publisher;
-        this.borrowCount = borrowCount;
+        this.borrow_count = borrow_count;
         this.ISBN_NO = ISBN_NO;
         this.year_of_publication = year_of_publication;
         this.count = count;
@@ -71,16 +71,6 @@ public class Book {
         this.borrow_count = borrowCount;
     }
 
-    public Book(Long book_id, String book_name, String author, String publisher, Long borrow_count, String ISBN_NO, LocalDate year_of_publication, Long count) {
-        this.book_id = book_id;
-        this.book_name = book_name;
-        this.author = author;
-        this.publisher = publisher;
-        this.borrow_count = borrow_count;
-        this.ISBN_NO = ISBN_NO;
-        this.year_of_publication = year_of_publication;
-        this.count = count;
-    }
 
     public void updateISBN_NO(String ISBN_NO){
         this.ISBN_NO = ISBN_NO;
