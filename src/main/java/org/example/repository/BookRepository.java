@@ -39,7 +39,7 @@ public class BookRepository {
 
     }
 
-    public List<Book> findByBook(String author) {
+    public List<Book> findByBookName(String author) {
         String query = "select * from books where author = '" + author + "'";
         return getBooks(query);
     }
@@ -95,4 +95,8 @@ public class BookRepository {
         }
     }
 
+    public List<Book> findByYear(LocalDate localDate) {
+
+
+    }
 }
