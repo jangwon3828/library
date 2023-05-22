@@ -1,5 +1,6 @@
 package org.example.service;
 
+
 import org.example.entity.Book;
 import org.example.repository.BookRepository;
 
@@ -10,7 +11,7 @@ public class BookReadService {
     private BookReadService(){
     }
 
-    public BookReadService getInstance(){
+    public static BookReadService getInstance(){
         return bookReadService;
     }
 
