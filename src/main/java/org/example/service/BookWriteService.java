@@ -2,7 +2,6 @@ package org.example.service;
 
 import org.example.entity.Book;
 import org.example.input.InputView;
-import org.example.input.OutPutView;
 import org.example.repository.BookRepository;
 
 import java.time.LocalDate;
@@ -32,6 +31,5 @@ public class BookWriteService {
 
         BookRepository br = BookRepository.getInstance();
         br.insertBook(book);
-        OutPutView.printMsg("도서 등록이 완료되었습니다.");
     }
 }

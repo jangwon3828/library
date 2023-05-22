@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.entity.Book;
+import org.example.input.OutPutView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,8 +40,8 @@ public class BookRepository {
 
     }
 
-    public List<Book> findByBookName(String author) {
-        String query = "select * from books where author = '" + author + "'";
+    public List<Book> findByBookName(String book_name) {
+        String query = "select * from books where bookname = '" + book_name + "'";
         return getBooks(query);
     }
 
@@ -92,19 +93,18 @@ public class BookRepository {
     public void insertBook(Book book){
         try{
             st.execute("insert into books(book_id, bookname, author, publisher, borrowcount, ISBN_NO, year_of_publication, count) values (null,'"+book.getBook_name()+"','"+book.getAuthor()+"','"+book.getPublisher()+"','"+book.getBorrow_count()+"','"+book.getISBN_NO()+"','"+book.getYear_of_publication()+"','"+book.getCount()+"');");
+            OutPutView.printMsg("도서 등록이 완료되었습니다.");
         }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            try{
-                if(st!=null)
-                    st.close();
-                if(con !=null)
-                    con.close();
-            }catch(Exception e2){
-                e2.printStackTrace();
-            }
+            System.out.println("에러발생 insertBook");
         }
     }
 
-
+    public void deleteBook(Long book_id){
+        try{
+            st.execute("DELETE FROM books WHERE book_id='"+ book_id +"'");
+            OutPutView.printMsg("도서 삭제가 완료되었습니다.");
+        }catch(Exception e){
+            System.out.println("에러발생 deleteBook");
+        }
+    }
 }
