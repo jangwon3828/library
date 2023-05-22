@@ -14,6 +14,10 @@ public class OutPutView {
         System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
     }
 
+    public static void printMsg(String msg){
+        System.out.println(msg);
+    }
+
     public static void printBooks(List<Book> books) {
         int n = 1;
         books.stream().forEach(book -> {
