@@ -48,7 +48,7 @@ public class BookWriteService {
             index = howToFind();
             books = selectFind(index, books);
         }
-        Long bookId = inputLong("반납할 책의 고유 번호를 입력해주세요");
+        Long bookId = inputLong("대여할 책의 고유 번호를 입력해주세요");
         if (bookRepository.checkoutBook(bookId)) {
             printMsg("책을 빌렸습니다");
         } else {
