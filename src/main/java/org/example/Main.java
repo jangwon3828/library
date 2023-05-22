@@ -1,27 +1,29 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
+
+import static org.example.Connection.conn;
+import static org.example.Connection.st;
 
 public class Main {
-    static Connection conn = null;
-    static Statement st = null;
-    static{
-        try{
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db01?serverTimezon=UTC","root","1234");
-            st = conn.createStatement();
-        }catch(Exception e){
-            e.printStackTrace();
+
+    public static void main(String[] args) {
+        connectDB();
+        init();
+        while (true){
+
         }
     }
-    public static void main(String[] args) {
+
+    private static void init() {
+        System.out.println("반갑습니다");
+        System.out.println("");
+    }
+
+    private static void connectDB() {
         try{
             ResultSet rs = st.executeQuery("show databases");
-            while(rs.next()){
-                System.out.println(rs.getString("Database"));
-            }
+            System.out.println("데이베이스 연결이 성공적으로 되었습니다.");
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -34,6 +36,5 @@ public class Main {
                 e2.printStackTrace();
             }
         }
-
     }
 }
